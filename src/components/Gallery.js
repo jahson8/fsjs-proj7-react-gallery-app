@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams } from "react-router";
 
 // Component Imports
 import GalleryItem from "./GalleryItem";
@@ -22,10 +21,9 @@ const Gallery = (props) => {
     photos = <NoPhotos />;
   }
 
-  const { query } = useParams();
   return (
     <div className="photo-container">
-      <h2>{query}</h2>
+      <h2>Results</h2>
       <ul>{photos}</ul>
     </div>
   );

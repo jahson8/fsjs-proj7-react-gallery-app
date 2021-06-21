@@ -18,10 +18,10 @@ class SearchForm extends Component {
     this.props.onSearch(this.query.value);
     let path = `/search/${this.state.searchTerm}`;
     this.props.history.push(path);
-
-    evt.currentTarget.reset();
+    this.setState({
+      searchTerm: "",
+    });
   };
-
   render() {
     return (
       <form className="search-form" onSubmit={this.handleSubmit}>
