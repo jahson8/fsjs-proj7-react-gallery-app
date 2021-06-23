@@ -14,6 +14,7 @@ import SearchForm from "./SearchForm";
 import Nav from "./Nav";
 import Gallery from "./Gallery";
 import apiKey from "../config";
+import PageNotFound from "./PageNotFound";
 
 class App extends Component {
   state = {
@@ -41,19 +42,22 @@ class App extends Component {
         if (isLink) {
           this.setState({
             [query]: response.data.photos.photo,
-            isloading: false,
           });
         } else {
           this.setState({
             images: response.data.photos.photo,
-            isloading: false,
+            query,
           });
         }
+
+        this.setState({ isloading: false });
       })
       .catch((error) => {
         // handle errors
         console.error("Error fetching and parsing Data", error);
       });
+
+    this.setState({ isloading: true });
   };
 
   render() {
@@ -82,8 +86,15 @@ class App extends Component {
               />
               <Route
                 path="/search/:query"
-                children={(match) => <Gallery data={this.state.images} />}
+                children={({ match }) => (
+                  <Gallery
+                    data={this.state.images}
+                    query={match.params.query}
+                    fetchData={this.performSearch}
+                  />
+                )}
               />
+              <Route component={PageNotFound} />
             </Switch>
           )}
         </div>

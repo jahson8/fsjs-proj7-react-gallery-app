@@ -22,6 +22,7 @@ class SearchForm extends Component {
       searchTerm: "",
     });
   };
+
   render() {
     return (
       <form className="search-form" onSubmit={this.handleSubmit}>

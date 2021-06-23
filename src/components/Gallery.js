@@ -6,6 +6,7 @@ import NoPhotos from "./NoPhotos";
 
 const Gallery = (props) => {
   const results = props.data;
+
   let photos;
   if (results.length > 0) {
     photos = results.map((photo) => (
